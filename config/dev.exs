@@ -4,7 +4,7 @@ use Mix.Config
 config :ja_translations, JaTranslations.Repo,
   username: "postgres",
   password: "postgres",
-  database: "ja_translations_dev",
+  database: "ja_translations_develop",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

@@ -8,7 +8,7 @@ use Mix.Config
 config :ja_translations, JaTranslations.Repo,
   username: "postgres",
   password: "postgres",
-  database: "ja_translations_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "ja_translations_testing#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
