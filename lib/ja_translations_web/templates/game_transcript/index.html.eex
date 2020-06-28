@@ -1,0 +1,6 @@
+<h1>Select a Title</h1>
+<ul>
+ <%= for gt <- @game_transcripts do %>
+  <li><a href="<%= Routes.game_transcript_path(@conn, :show, gt) %>"><%= gt.title %></a></li>
+ <% end %>
+</ul>

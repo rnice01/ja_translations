@@ -35,7 +35,16 @@ defmodule JaTranslations.Transcripts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_game_transcript!(id), do: Repo.get!(GameTranscript, id)
+  def get_game_transcript!(id) do
+    transcript = JaTranslations.Transcripts.GameTranscript
+    |> where([t], t.id == ^id)
+    |> join(:left, [t], chapters in assoc(t, :chapters))
+    |> join(:left, [t, c], scenes in assoc(c, :scenes))
+    |> preload([transcript, chapters, scenes], [chapters: {chapters, scenes: scenes}])
+    |> Repo.one
+
+    transcript
+  end
 
   @doc """
   Gets the GameTranscript by title

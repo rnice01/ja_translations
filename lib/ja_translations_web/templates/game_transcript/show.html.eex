@@ -1,0 +1,2 @@
+<div id="data" data="<%= @game_transcript %>"></div>
+<script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/gameTranscripts.js") %>"></script>
