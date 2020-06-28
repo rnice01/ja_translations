@@ -22,23 +22,8 @@ defmodule JaTranslationsWeb.GameTranscriptController do
 
   def show(conn, %{"id" => id}) do
     game_transcript = JaTranslations.Transcripts.get_game_transcript!(id)
-    data = %{id: game_transcript.id,
-      title: game_transcript.title,
-      image: game_transcript.image,
-      chapters: Enum.map(game_transcript.chapters,
-        fn %{id: id, name: n, number: nm, scenes: s} -> %{
-          "id" => id,
-          "name" => n,
-          "number" => nm,
-          "scenes" => Enum.map(s, fn %{id: id, number: n, title: t} -> %{
-            "id" => id,
-            "title" => t,
-            "number" => n
-          } end)
-        }
-      end)
-    }
-    render(conn, "show.html", game_transcript: Jason.encode!(data))
+    data = JaTranslationsWeb.GameTranscriptView.game_transcript_json(game_transcript)
+    render(conn, "show.html", game_transcript: data)
   end
 
   def update(conn, %{"id" => id, "game_transcript" => game_transcript_params}) do
