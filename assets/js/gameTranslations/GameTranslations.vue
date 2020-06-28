@@ -10,7 +10,7 @@
             </div>
 
             <nav class="mt-10">
-                <div class="flex items-center mt-4 py-2 px-6 text-gray-200 border-gray-100">
+                <div class="flex items-center mt-4 py-2 px-6 text-gray-200">
                     <div class="w-full">
                         <label for="chapter-select">Chapter: </label>
                         <select id="chapter-select" v-model="chapter" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
 
-                <div class="flex items-center mt-4 py-2 px-6 block text-gray-200 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100">
+                <div class="flex items-center mt-4 py-2 px-6 text-gray-200">
                     <div class="w-full">
                         <label for="scene-select">Scene: </label>
                         <select id="scene-select" v-model="scene" class="text-black block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
