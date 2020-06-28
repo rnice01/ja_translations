@@ -70,7 +70,7 @@ import Dialogue from './components/Dialogue'
 export default {
   props: {
     data: {
-      type: Array
+      type: Object
     }
   },
   data: function() {
@@ -91,7 +91,12 @@ export default {
       },
       set: function (newValue) {
         this.selectedChapter = newValue
-        this.selectChapter(newValue)
+        for (let i = 0; i < this.chapters.length; i++) {
+          if (this.chapters[i].id == newValue) {
+            this.scenes = this.chapters[i].scenes
+            break;
+          }
+        }
       }
     },
     scene: {
@@ -100,25 +105,18 @@ export default {
       },
       set: function (val) {
         this.selectedScene = val
-        this.selectScene(val)
+        this.fetchScene(val)
       }
     }
   },
   methods: {
-    selectScene: function (sceneId) {
-      fetch(`/api/scenes/${sceneId}/dialogue`)
+    fetchScene: function (sceneId) {
+      fetch(`/api/scenes/${sceneId}`)
         .then((resp) => resp.json())
         .then((data) => {
-          this.dialogue = data
+          this.dialogue = data.dialogues
         })
     },
-    selectChapter: function (chapterId) {
-      fetch(`/api/chapters/${chapterId}/scenes`)
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.scenes = data
-        })
-    }
   },
   components: {
     Dialogue

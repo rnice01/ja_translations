@@ -6,6 +6,7 @@ defmodule JaTranslations.Transcripts.GameCharacter do
     field :image, :string
     field :name, :string
     field :game_transcript_id, :id
+    has_many :dialogues, JaTranslations.Transcripts.Dialogue
 
     timestamps()
   end

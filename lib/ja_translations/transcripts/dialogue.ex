@@ -8,7 +8,7 @@ defmodule JaTranslations.Transcripts.Dialogue do
     field :grammar_notes, {:array, :string}
     field :japanese, :string
     field :number, :integer
-    field :character_id, :id
+    belongs_to :character, JaTranslations.Transcripts.GameCharacter
     belongs_to :scene, JaTranslations.Transcripts.Scene
 
     timestamps()

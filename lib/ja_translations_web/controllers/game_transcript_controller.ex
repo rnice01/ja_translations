@@ -41,11 +41,6 @@ defmodule JaTranslationsWeb.GameTranscriptController do
     render(conn, "show.html", game_transcript: Jason.encode!(data))
   end
 
-  def by_title(conn, %{"title" => title}) do
-    game_transcript = Transcripts.get_game_transcript_by_title(title)
-    render(conn, "show.json", game_transcript: game_transcript)
-  end
-
   def update(conn, %{"id" => id, "game_transcript" => game_transcript_params}) do
     game_transcript = Transcripts.get_game_transcript!(id)
 

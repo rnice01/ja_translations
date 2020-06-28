@@ -30,19 +30,8 @@ defmodule JaTranslationsAPI.GameTranscriptController do
     render(conn, "show.json", game_transcript: game_transcript)
   end
 
-  def update(conn, %{"id" => id, "game_transcript" => game_transcript_params}) do
-    game_transcript = Transcripts.get_game_transcript!(id)
-
-    with {:ok, %GameTranscript{} = game_transcript} <- Transcripts.update_game_transcript(game_transcript, game_transcript_params) do
-      render(conn, "show.json", game_transcript: game_transcript)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    game_transcript = Transcripts.get_game_transcript!(id)
-
-    with {:ok, %GameTranscript{}} <- Transcripts.delete_game_transcript(game_transcript) do
-      send_resp(conn, :no_content, "")
-    end
+  def scenes(conn, %{"id" => id}) do
+    scene = Transcripts.get_scene(id)
+    render(conn, "scene.json", scene: scene)
   end
 end

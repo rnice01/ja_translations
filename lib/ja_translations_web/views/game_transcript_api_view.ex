@@ -1,4 +1,4 @@
-defmodule JaTranslationsWeb.GameTranscriptView do
+defmodule JaTranslationsAPI.GameTranscriptView do
   use JaTranslationsWeb, :view
   alias JaTranslationsWeb.GameTranscriptView
 
@@ -41,13 +41,19 @@ defmodule JaTranslationsWeb.GameTranscriptView do
         english: e,
         grammar_notes: gn,
         character: ch
-      } -> %{
-        context: c,
-        japanese: j,
-        english: e,
-        grammar_notes: gn,
-        character: %{id: ch.id, name: ch.name, image: ch.image}
-      } end)
+      } ->
+        s = %{
+          context: c,
+          japanese: j,
+          english: e,
+          grammar_notes: gn,
+          character: %{}
+        }
+        if ch do
+          Map.put(s, :character, %{id: ch.id, name: ch.name, image: ch.image})
+        end
+        s
+      end)
     }
   end
 end

@@ -36,11 +36,12 @@ defmodule JaTranslations.Transcripts do
 
   """
   def get_game_transcript!(id) do
+    scenes_order = from(s in JaTranslations.Transcripts.Scene, order_by: s.number)
+    chapters_order = from(c in JaTranslations.Transcripts.Chapter, order_by: c.number, preload: [scenes: ^scenes_order])
+
     transcript = JaTranslations.Transcripts.GameTranscript
     |> where([t], t.id == ^id)
-    |> join(:left, [t], chapters in assoc(t, :chapters))
-    |> join(:left, [t, c], scenes in assoc(c, :scenes))
-    |> preload([transcript, chapters, scenes], [chapters: {chapters, scenes: scenes}])
+    |> preload([chapters: ^chapters_order])
     |> Repo.one
 
     transcript
@@ -51,11 +52,13 @@ defmodule JaTranslations.Transcripts do
   and preloads the chapters and scenes.
   """
   def get_game_transcript_by_title(title) do
+    scenes_order = from(s in JaTranslations.Transcripts.Scene, order_by: s.number)
+    chapters_order = from(c in JaTranslations.Transcripts.Chapter, order_by: c.number, preload: [scenes: ^scenes_order])
+
     transcript = JaTranslations.Transcripts.GameTranscript
     |> where([t], ilike(t.title, ^title))
-    |> join(:left, [t], chapters in assoc(t, :chapters))
-    |> join(:left, [t, c], scenes in assoc(c, :scenes))
-    |> preload([transcript, chapters, scenes], [chapters: {chapters, scenes: scenes}])
+    |> preload([chapters: ^chapters_order])
+    |> Repo.one
     |> Repo.one
 
     transcript
@@ -124,5 +127,16 @@ defmodule JaTranslations.Transcripts do
   """
   def change_game_transcript(%GameTranscript{} = game_transcript, attrs \\ %{}) do
     GameTranscript.changeset(game_transcript, attrs)
+  end
+
+  def get_scene(id) do
+    dialogue_order = from(d in JaTranslations.Transcripts.Dialogue, order_by: d.number, preload: [:character])
+
+    scene = JaTranslations.Transcripts.Scene
+    |> where([s], s.id == ^id)
+    |> preload([dialogues: ^dialogue_order])
+    |> Repo.one
+
+    scene
   end
 end

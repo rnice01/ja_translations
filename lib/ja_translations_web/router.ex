@@ -14,6 +14,7 @@ defmodule JaTranslationsWeb.Router do
     scope "api", JaTranslationsAPI, as: :api do
       get "/game-transcripts/:id", GameTranscriptController, :show
       get "/game-transcripts/title/:title", GameTranscriptController, :by_title
+      get "/scenes/:id", GameTranscriptController, :scenes
     end
   end
 
