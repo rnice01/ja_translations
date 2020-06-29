@@ -11,4 +11,9 @@ defmodule JaTranslationsWeb.PageController do
     |> Jason.encode!
     render(conn, "game_translations.html", data: transcripts)
   end
+
+  def admin(conn, _) do
+    user = Guardian.Plug.current_resource(conn)
+    render(conn, "admin.html", current_user: user)
+  end
 end

@@ -9,6 +9,14 @@ defmodule JaTranslationsWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :auth do
+    plug JaTranslations.Accounts.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     scope "api", JaTranslationsAPI, as: :api do
@@ -19,11 +27,21 @@ defmodule JaTranslationsWeb.Router do
   end
 
   scope "/", JaTranslationsWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     get "/game-transcripts", GameTranscriptController, :index
     get "/game-transcripts/:id", GameTranscriptController, :show
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
+  end
+
+  scope "/admin", JaTranslationsWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    get "/", PageController, :admin
   end
 
   # Other scopes may use custom stacks.

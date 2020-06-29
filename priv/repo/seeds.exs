@@ -55,3 +55,5 @@ JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "What
 JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "hey where were you?", number: 0, scene: sc1_1})
 JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "I was here", number: 1, scene: sc1_1})
 JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "What?", number: 2, scene: sc1_1})
+
+JaTranslations.Accounts.create_user(%{username: "user", email: "my@email.com", password: "password"})
