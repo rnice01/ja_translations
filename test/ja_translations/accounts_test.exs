@@ -20,6 +20,17 @@ defmodule JaTranslations.AccountsTest do
       user
     end
 
+    test "users cannot authenticate as admins" do
+      plain_user = Map.merge(@valid_attrs, %{email: "plainuser@email.com", is_admin: false})
+      admin = Map.merge(@valid_attrs, %{email: "admin@email.com", is_admin: true})
+
+      Accounts.create_user(plain_user)
+      Accounts.create_user(admin)
+
+      assert {:error, :invalid_credentials} = Accounts.authenticate_admin(plain_user.email, plain_user.password)
+      assert {:ok, _} = Accounts.authenticate_admin(admin.email, admin.password)
+    end
+
     test "emails are unique" do
       Accounts.create_user(@valid_attrs)
       assert {:error, %Ecto.Changeset{} = changeset} = Accounts.create_user(@valid_attrs)
