@@ -1,5 +1,5 @@
-defmodule JaTranslationsWeb.SessionController do
-  use JaTranslationsWeb, :controller
+defmodule JaTranslationsWebAdmin.SessionController do
+  use JaTranslationsWebAdmin, :controller
 
   alias JaTranslations.{Accounts, Accounts.User, Accounts.Guardian}
 
@@ -14,14 +14,14 @@ defmodule JaTranslationsWeb.SessionController do
   end
 
   def login(conn, %{"user" => %{"email" => email, "password" => password}}) do
-    Accounts.authenticate_user(email, password)
+    Accounts.authenticate_admin(email, password)
     |> login_reply(conn)
   end
 
   def logout(conn, _) do
     conn
     |> Guardian.Plug.sign_out()
-    |> redirect(to: "/login")
+    |> redirect(to: "/admin/login")
   end
 
   defp login_reply({:ok, user}, conn) do
