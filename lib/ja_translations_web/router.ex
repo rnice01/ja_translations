@@ -19,7 +19,7 @@ defmodule JaTranslationsWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    scope "api", JaTranslationsAPI, as: :api do
+    scope "/api", JaTranslationsAPI, as: :api do
       get "/game-transcripts/:id", GameTranscriptController, :show
       get "/game-transcripts/title/:title", GameTranscriptController, :by_title
       get "/scenes/:id", GameTranscriptController, :scenes
@@ -32,17 +32,22 @@ defmodule JaTranslationsWeb.Router do
     get "/", PageController, :index
     get "/game-transcripts", GameTranscriptController, :index
     get "/game-transcripts/:id", GameTranscriptController, :show
+  end
+
+   scope "/admin", JaTranslationsWebAdmin do
+    pipe_through [:browser, :auth, :ensure_auth]
+
+    get "/", PageController, :index
+  end
+
+  scope "/admin", JaTranslationsWebAdmin do
+    pipe_through [:browser, :auth]
 
     get "/login", SessionController, :new
     post "/login", SessionController, :login
     get "/logout", SessionController, :logout
   end
 
-  scope "/admin", JaTranslationsWeb do
-    pipe_through [:browser, :auth, :ensure_auth]
-
-    get "/", PageController, :admin
-  end
 
   # Other scopes may use custom stacks.
   # scope "/api", JaTranslationsWeb do
