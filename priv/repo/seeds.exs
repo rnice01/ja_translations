@@ -17,17 +17,45 @@ ch1 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Chapter{name: "Cha
 ch2 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Chapter{name: "Chapter 2", number: 1, game_transcript: gt})
 ch3 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Chapter{name: "Chapter 3", number: 2, game_transcript: gt})
 
-sc1_1 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "At player's house 1", chapter: ch1})
-sc1_2 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "Outside player's house 1", chapter: ch1})
-sc1_3 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "At rival's house 1", chapter: ch1})
-
-sc2_1 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "At Player's house 2", chapter: ch2})
-sc2_2 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "Outside player's house 2", chapter: ch2})
-sc2_3 = JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Scene{number: 0, title: "At rivals house 2", chapter: ch2})
-
 JaTranslations.Repo.insert!(
   %JaTranslations.Transcripts.Scene{
     number: 0,
+    title: "At rival's house 1",
+    chapter: ch1,
+    dialogues: [
+      %JaTranslations.Transcripts.Dialogue{
+        japanese: "untranslated text goes here for chapter 1 scene1",
+        number: 0
+      },
+      %JaTranslations.Transcripts.Dialogue{
+        japanese: "untranslated text goes here for chapter 1 scene 2",
+        number: 1
+      }
+    ]
+  }
+)
+
+JaTranslations.Repo.insert!(
+  %JaTranslations.Transcripts.Scene{
+    number: 1,
+    title: "At rival's house 2",
+    chapter: ch2,
+    dialogues: [
+      %JaTranslations.Transcripts.Dialogue{
+        japanese: "untranslated text goes here for chapter 2 scene1",
+        number: 0
+      },
+      %JaTranslations.Transcripts.Dialogue{
+        japanese: "untranslated text goes here for chapter 2 scene 2",
+        number: 1
+      }
+    ]
+  }
+)
+
+JaTranslations.Repo.insert!(
+  %JaTranslations.Transcripts.Scene{
+    number: 2,
     title: "At rival's house 3",
     chapter: ch3,
     dialogues: [
@@ -37,23 +65,10 @@ JaTranslations.Repo.insert!(
       },
       %JaTranslations.Transcripts.Dialogue{
         japanese: "untranslated text goes here for chapter 3 scene 2",
-        number: 0
+        number: 1
       }
     ]
   }
-)
+}
 
-
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "hey where were you?", number: 0, scene: sc1_1})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "I was here", number: 1, scene: sc1_1})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "What?", number: 2, scene: sc1_1})
-
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "hey where were you?", number: 0, scene: sc1_2})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "I was here", number: 1, scene: sc1_2})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "What?", number: 2, scene: sc1_2})
-
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "hey where were you?", number: 0, scene: sc1_1})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "I was here", number: 1, scene: sc1_1})
-JaTranslations.Repo.insert!(%JaTranslations.Transcripts.Dialogue{japanese: "What?", number: 2, scene: sc1_1})
-
-JaTranslations.Accounts.create_user(%{username: "user", email: "my@email.com", password: "password"})
+JaTranslations.Accounts.create_user(%{username: "user", email: "admin@email.com", password: "password", is_admin: true})
