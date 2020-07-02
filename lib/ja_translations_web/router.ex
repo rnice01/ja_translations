@@ -9,6 +9,10 @@ defmodule JaTranslationsWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin_layout do
+    plug :put_layout, {JaTranslationsWeb.LayoutView, :admin}
+  end
+
   pipeline :auth do
     plug JaTranslations.Accounts.Pipeline
   end
@@ -34,14 +38,14 @@ defmodule JaTranslationsWeb.Router do
     get "/game-transcripts/:id", GameTranscriptController, :show
   end
 
-   scope "/admin", JaTranslationsWebAdmin do
-    pipe_through [:browser, :auth, :ensure_auth]
+   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
 
     get "/", PageController, :index
   end
 
-  scope "/admin", JaTranslationsWebAdmin do
-    pipe_through [:browser, :auth]
+  scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin_layout, :auth]
 
     get "/login", SessionController, :new
     post "/login", SessionController, :login

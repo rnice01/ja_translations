@@ -1,5 +1,5 @@
-defmodule JaTranslationsWebAdmin.PageController do
-  use JaTranslationsWebAdmin, :controller
+defmodule JaTranslationsWeb.Admin.PageController do
+  use JaTranslationsWeb, :controller
 
   def index(conn, _params) do
     user = Guardian.Plug.current_resource(conn)

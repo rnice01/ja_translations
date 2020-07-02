@@ -1,5 +1,5 @@
-defmodule JaTranslationsWebAdmin.SessionController do
-  use JaTranslationsWebAdmin, :controller
+defmodule JaTranslationsWeb.Admin.SessionController do
+  use JaTranslationsWeb, :controller
 
   alias JaTranslations.{Accounts, Accounts.User, Accounts.Guardian}
 
