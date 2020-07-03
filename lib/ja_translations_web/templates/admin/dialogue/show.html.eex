@@ -1,0 +1,33 @@
+<h1>Show Dialogue</h1>
+
+<ul>
+
+  <li>
+    <strong>Context:</strong>
+    <%= @dialogue.context %>
+  </li>
+
+  <li>
+    <strong>English:</strong>
+    <%= @dialogue.english %>
+  </li>
+
+  <li>
+    <strong>Japanese:</strong>
+    <%= @dialogue.japanese %>
+  </li>
+
+  <li>
+    <strong>Grammar notes:</strong>
+    <%= @dialogue.grammar_notes %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @dialogue.number %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.admin_dialogue_path(@conn, :edit, @dialogue) %></span>
+<span><%= link "Back", to: Routes.admin_dialogue_path(@conn, :index) %></span>

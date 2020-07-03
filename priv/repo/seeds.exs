@@ -34,7 +34,6 @@ JaTranslations.Repo.insert!(
     ]
   }
 )
-
 JaTranslations.Repo.insert!(
   %JaTranslations.Transcripts.Scene{
     number: 1,

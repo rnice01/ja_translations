@@ -1,4 +1,4 @@
-defmodule JaTranslationsAPI.GameTranscriptController do
+defmodule JaTranslations.Api.GameTranscriptController do
   use JaTranslationsWeb, :controller
 
   alias JaTranslations.Transcripts

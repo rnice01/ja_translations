@@ -1,0 +1,34 @@
+<h1>Listing Dialogues</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Context</th>
+      <th>English</th>
+      <th>Japanese</th>
+      <th>Grammar notes</th>
+      <th>Number</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for dialogue <- @dialogues do %>
+    <tr>
+      <td><%= dialogue.context %></td>
+      <td><%= dialogue.english %></td>
+      <td><%= dialogue.japanese %></td>
+      <td><%= dialogue.grammar_notes %></td>
+      <td><%= dialogue.number %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.admin_dialogue_path(@conn, :show, dialogue) %></span>
+        <span><%= link "Edit", to: Routes.admin_dialogue_path(@conn, :edit, dialogue) %></span>
+        <span><%= link "Delete", to: Routes.admin_dialogue_path(@conn, :delete, dialogue), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Dialogue", to: Routes.admin_dialogue_path(@conn, :new) %></span>

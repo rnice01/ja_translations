@@ -1,0 +1,32 @@
+<h1>Listing Scenes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Number</th>
+      <th>Title</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for scene <- @scenes do %>
+    <tr>
+      <td><%= scene.description %></td>
+      <td><%= scene.image %></td>
+      <td><%= scene.number %></td>
+      <td><%= scene.title %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.admin_scene_path(@conn, :show, scene) %></span>
+        <span><%= link "Edit", to: Routes.admin_scene_path(@conn, :edit, scene) %></span>
+        <span><%= link "Delete", to: Routes.admin_scene_path(@conn, :delete, scene), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Scene", to: Routes.admin_scene_path(@conn, :new) %></span>

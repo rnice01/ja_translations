@@ -5,7 +5,7 @@ defmodule JaTranslations.Transcripts.GameCharacter do
   schema "game_characters" do
     field :image, :string
     field :name, :string
-    field :game_transcript_id, :id
+    belongs_to :game_transcript, JaTranslations.Transcripts.GameTranscript
     has_many :dialogues, JaTranslations.Transcripts.Dialogue
 
     timestamps()

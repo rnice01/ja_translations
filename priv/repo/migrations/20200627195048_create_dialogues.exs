@@ -8,13 +8,13 @@ defmodule JaTranslations.Repo.Migrations.CreateDialogues do
       add :english, :string
       add :grammar_notes, {:array, :string}, default: [""]
       add :number, :integer, null: false, default: 0
-      add :character_id, references(:game_characters, on_delete: :nothing), null: true
+      add :game_character_id, references(:game_characters, on_delete: :nothing), null: true
       add :scene_id, references(:scenes, on_delete: :nothing), null: false
 
       timestamps()
     end
 
-    create index(:dialogues, [:character_id])
+    create index(:dialogues, [:game_character_id])
     create index(:dialogues, [:scene_id])
   end
 end

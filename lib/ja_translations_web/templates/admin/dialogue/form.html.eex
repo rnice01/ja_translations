@@ -1,0 +1,31 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :context %>
+  <%= text_input f, :context %>
+  <%= error_tag f, :context %>
+
+  <%= label f, :english %>
+  <%= text_input f, :english %>
+  <%= error_tag f, :english %>
+
+  <%= label f, :japanese %>
+  <%= text_input f, :japanese %>
+  <%= error_tag f, :japanese %>
+
+  <%= label f, :grammar_notes %>
+  <%= multiple_select f, :grammar_notes, ["Option 1": "option1", "Option 2": "option2"] %>
+  <%= error_tag f, :grammar_notes %>
+
+  <%= label f, :number %>
+  <%= number_input f, :number %>
+  <%= error_tag f, :number %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

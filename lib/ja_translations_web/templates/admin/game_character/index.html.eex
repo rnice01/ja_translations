@@ -1,0 +1,28 @@
+<h1>Listing Game characters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for game_character <- @game_characters do %>
+    <tr>
+      <td><%= game_character.image %></td>
+      <td><%= game_character.name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.admin_game_character_path(@conn, :show, game_character) %></span>
+        <span><%= link "Edit", to: Routes.admin_game_character_path(@conn, :edit, game_character) %></span>
+        <span><%= link "Delete", to: Routes.admin_game_character_path(@conn, :delete, game_character), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Game character", to: Routes.admin_game_character_path(@conn, :new) %></span>

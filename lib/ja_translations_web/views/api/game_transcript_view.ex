@@ -1,4 +1,4 @@
-defmodule JaTranslationsAPI.GameTranscriptView do
+defmodule JaTranslations.Api.GameTranscriptView do
   use JaTranslationsWeb, :view
   alias JaTranslationsWeb.GameTranscriptView
 

@@ -139,4 +139,452 @@ defmodule JaTranslations.Transcripts do
 
     scene
   end
+
+  alias JaTranslations.Transcripts.GameTranscript
+
+  @doc """
+  Returns the list of game_transcripts.
+
+  ## Examples
+
+      iex> list_game_transcripts()
+      [%GameTranscript{}, ...]
+
+  """
+  def list_game_transcripts do
+    raise "TODO"
+  end
+
+  @doc """
+  Gets a single game_transcript.
+
+  Raises if the Game transcript does not exist.
+
+  ## Examples
+
+      iex> get_game_transcript!(123)
+      %GameTranscript{}
+
+  """
+  def get_game_transcript!(id), do: raise "TODO"
+
+  @doc """
+  Creates a game_transcript.
+
+  ## Examples
+
+      iex> create_game_transcript(%{field: value})
+      {:ok, %GameTranscript{}}
+
+      iex> create_game_transcript(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_game_transcript(_attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a game_transcript.
+
+  ## Examples
+
+      iex> update_game_transcript(game_transcript, %{field: new_value})
+      {:ok, %GameTranscript{}}
+
+      iex> update_game_transcript(game_transcript, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_game_transcript(%GameTranscript{} = game_transcript, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a GameTranscript.
+
+  ## Examples
+
+      iex> delete_game_transcript(game_transcript)
+      {:ok, %GameTranscript{}}
+
+      iex> delete_game_transcript(game_transcript)
+      {:error, ...}
+
+  """
+  def delete_game_transcript(%GameTranscript{} = game_transcript) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking game_transcript changes.
+
+  ## Examples
+
+      iex> change_game_transcript(game_transcript)
+      %Todo{...}
+
+  """
+  def change_game_transcript(%GameTranscript{} = game_transcript, _attrs) do
+    raise "TODO"
+  end
+
+  alias JaTranslations.Transcripts.Chapter
+
+  @doc """
+  Returns the list of chapters.
+
+  ## Examples
+
+      iex> list_chapters()
+      [%Chapter{}, ...]
+
+  """
+  def list_game_transcript_chapters(game_transcript_id) do
+    Chapter
+    |> where([c], c.game_transcript_id == ^game_transcript_id)
+    |> order_by([c], c.number)
+    |> Repo.all
+  end
+
+  @doc """
+  Gets a single chapter.
+
+  Raises if the Chapter does not exist.
+
+  ## Examples
+
+      iex> get_chapter!(123)
+      %Chapter{}
+
+  """
+  def get_chapter!(id), do: raise "TODO"
+
+  @doc """
+  Creates a chapter.
+
+  ## Examples
+
+      iex> create_chapter(%{field: value})
+      {:ok, %Chapter{}}
+
+      iex> create_chapter(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_chapter(attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a chapter.
+
+  ## Examples
+
+      iex> update_chapter(chapter, %{field: new_value})
+      {:ok, %Chapter{}}
+
+      iex> update_chapter(chapter, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_chapter(%Chapter{} = chapter, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a Chapter.
+
+  ## Examples
+
+      iex> delete_chapter(chapter)
+      {:ok, %Chapter{}}
+
+      iex> delete_chapter(chapter)
+      {:error, ...}
+
+  """
+  def delete_chapter(%Chapter{} = chapter) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking chapter changes.
+
+  ## Examples
+
+      iex> change_chapter(chapter)
+      %Todo{...}
+
+  """
+  def change_chapter(%Chapter{} = chapter, _attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  alias JaTranslations.Transcripts.Scene
+
+  @doc """
+  Returns the list of scenes.
+
+  ## Examples
+
+      iex> list_scenes()
+      [%Scene{}, ...]
+
+  """
+  def list_scenes do
+    raise "TODO"
+  end
+
+  @doc """
+  Gets a single scene.
+
+  Raises if the Scene does not exist.
+
+  ## Examples
+
+      iex> get_scene!(123)
+      %Scene{}
+
+  """
+  def get_scene!(id), do: raise "TODO"
+
+  @doc """
+  Creates a scene.
+
+  ## Examples
+
+      iex> create_scene(%{field: value})
+      {:ok, %Scene{}}
+
+      iex> create_scene(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_scene(attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a scene.
+
+  ## Examples
+
+      iex> update_scene(scene, %{field: new_value})
+      {:ok, %Scene{}}
+
+      iex> update_scene(scene, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_scene(%Scene{} = scene, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a Scene.
+
+  ## Examples
+
+      iex> delete_scene(scene)
+      {:ok, %Scene{}}
+
+      iex> delete_scene(scene)
+      {:error, ...}
+
+  """
+  def delete_scene(%Scene{} = scene) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking scene changes.
+
+  ## Examples
+
+      iex> change_scene(scene)
+      %Todo{...}
+
+  """
+  def change_scene(%Scene{} = scene, _attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  alias JaTranslations.Transcripts.GameCharacter
+
+  @doc """
+  Returns the list of game_characters.
+
+  ## Examples
+
+      iex> list_game_characters()
+      [%GameCharacter{}, ...]
+
+  """
+  def list_game_characters do
+    raise "TODO"
+  end
+
+  @doc """
+  Gets a single game_character.
+
+  Raises if the Game character does not exist.
+
+  ## Examples
+
+      iex> get_game_character!(123)
+      %GameCharacter{}
+
+  """
+  def get_game_character!(id), do: raise "TODO"
+
+  @doc """
+  Creates a game_character.
+
+  ## Examples
+
+      iex> create_game_character(%{field: value})
+      {:ok, %GameCharacter{}}
+
+      iex> create_game_character(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_game_character(attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a game_character.
+
+  ## Examples
+
+      iex> update_game_character(game_character, %{field: new_value})
+      {:ok, %GameCharacter{}}
+
+      iex> update_game_character(game_character, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_game_character(%GameCharacter{} = game_character, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a GameCharacter.
+
+  ## Examples
+
+      iex> delete_game_character(game_character)
+      {:ok, %GameCharacter{}}
+
+      iex> delete_game_character(game_character)
+      {:error, ...}
+
+  """
+  def delete_game_character(%GameCharacter{} = game_character) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking game_character changes.
+
+  ## Examples
+
+      iex> change_game_character(game_character)
+      %Todo{...}
+
+  """
+  def change_game_character(%GameCharacter{} = game_character, _attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  alias JaTranslations.Transcripts.Dialogue
+
+  @doc """
+  Returns the list of dialogues.
+
+  ## Examples
+
+      iex> list_dialogues()
+      [%Dialogue{}, ...]
+
+  """
+  def list_dialogues do
+    raise "TODO"
+  end
+
+  @doc """
+  Gets a single dialogue.
+
+  Raises if the Dialogue does not exist.
+
+  ## Examples
+
+      iex> get_dialogue!(123)
+      %Dialogue{}
+
+  """
+  def get_dialogue!(id), do: raise "TODO"
+
+  @doc """
+  Creates a dialogue.
+
+  ## Examples
+
+      iex> create_dialogue(%{field: value})
+      {:ok, %Dialogue{}}
+
+      iex> create_dialogue(%{field: bad_value})
+      {:error, ...}
+
+  """
+  def create_dialogue(attrs \\ %{}) do
+    raise "TODO"
+  end
+
+  @doc """
+  Updates a dialogue.
+
+  ## Examples
+
+      iex> update_dialogue(dialogue, %{field: new_value})
+      {:ok, %Dialogue{}}
+
+      iex> update_dialogue(dialogue, %{field: bad_value})
+      {:error, ...}
+
+  """
+  def update_dialogue(%Dialogue{} = dialogue, attrs) do
+    raise "TODO"
+  end
+
+  @doc """
+  Deletes a Dialogue.
+
+  ## Examples
+
+      iex> delete_dialogue(dialogue)
+      {:ok, %Dialogue{}}
+
+      iex> delete_dialogue(dialogue)
+      {:error, ...}
+
+  """
+  def delete_dialogue(%Dialogue{} = dialogue) do
+    raise "TODO"
+  end
+
+  @doc """
+  Returns a data structure for tracking dialogue changes.
+
+  ## Examples
+
+      iex> change_dialogue(dialogue)
+      %Todo{...}
+
+  """
+  def change_dialogue(%Dialogue{} = dialogue, _attrs \\ %{}) do
+    raise "TODO"
+  end
 end

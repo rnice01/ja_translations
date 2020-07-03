@@ -38,12 +38,6 @@ defmodule JaTranslationsWeb.Router do
     get "/game-transcripts/:id", GameTranscriptController, :show
   end
 
-   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
-    pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
-
-    get "/", PageController, :index
-  end
-
   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
     pipe_through [:browser, :admin_layout, :auth]
 
@@ -52,6 +46,17 @@ defmodule JaTranslationsWeb.Router do
     get "/logout", SessionController, :logout
   end
 
+   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
+
+    get "/", PageController, :index
+    resources "/game-transcripts", GameTranscriptsController do
+      resources "/chapters", ChapterController
+    end
+    resources "/scenes", SceneController
+    resources "/game-characters", GameCharacterController
+    resources "/dialogues", DialogueController
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", JaTranslationsWeb do

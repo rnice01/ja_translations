@@ -1,0 +1,28 @@
+<h1>Show Scene</h1>
+
+<ul>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @scene.description %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @scene.image %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @scene.number %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @scene.title %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.admin_scene_path(@conn, :edit, @scene) %></span>
+<span><%= link "Back", to: Routes.admin_scene_path(@conn, :index) %></span>

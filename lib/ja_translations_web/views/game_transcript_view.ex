@@ -1,6 +1,5 @@
 defmodule JaTranslationsWeb.GameTranscriptView do
   use JaTranslationsWeb, :view
-  alias JaTranslationsWeb.GameTranscriptView
 
   def game_transcript_json(gt) do
     data = %{id: gt.id,
