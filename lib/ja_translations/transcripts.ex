@@ -332,8 +332,11 @@ defmodule JaTranslations.Transcripts do
       [%Scene{}, ...]
 
   """
-  def list_scenes do
-    raise "TODO"
+  def chapter_scenes(chapter_id) do
+    Scene
+    |> where([s], s.chapter_id == ^chapter_id)
+    |> order_by([s], s.number)
+    |> Repo.all
   end
 
   @doc """

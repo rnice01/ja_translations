@@ -19,9 +19,9 @@ defmodule JaTranslationsWeb.Admin.ChapterControllerTest do
   describe "index" do
     test "lists all chapters belonging to the game transcript", %{conn: conn} do
       game_transcript = insert(:game_transcript)
-      chapter1 = insert(:game_transcript_chapter, name: "hi chapter 1", game_transcript_id: game_transcript.id)
-      chapter2 = insert(:game_transcript_chapter, name: "hi chapter 2", game_transcript_id: game_transcript.id)
-      conn = get(conn, Routes.admin_game_transcripts_chapter_path(conn, :index, game_transcript.id))
+      chapter1 = insert(:chapter, name: "hi chapter 1", game_transcript: game_transcript)
+      chapter2 = insert(:chapter, name: "hi chapter 2", game_transcript: game_transcript)
+      conn = get(conn, Routes.admin_game_transcript_chapter_path(conn, :index, game_transcript.id))
       assert html_response(conn, 200) =~ chapter1.name
       assert html_response(conn, 200) =~ chapter2.name
     end

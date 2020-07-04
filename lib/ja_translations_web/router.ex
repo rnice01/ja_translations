@@ -50,12 +50,18 @@ defmodule JaTranslationsWeb.Router do
     pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
 
     get "/", PageController, :index
-    resources "/game-transcripts", GameTranscriptsController do
+    resources "/game-transcripts", GameTranscriptController do
       resources "/chapters", ChapterController
     end
-    resources "/scenes", SceneController
+    resources "/chapters", ChapterController do
+      resources "/scenes", SceneController
+    end
+
+    resources "/scenes", SceneController do
+      resources "/dialogues", DialogueController
+    end
+
     resources "/game-characters", GameCharacterController
-    resources "/dialogues", DialogueController
   end
 
   # Other scopes may use custom stacks.

@@ -4,9 +4,9 @@ defmodule JaTranslationsWeb.Admin.SceneController do
   alias JaTranslations.Transcripts
   alias JaTranslations.Transcripts.Scene
 
-  def index(conn, _params) do
-    scenes = Transcripts.list_scenes()
-    render(conn, "index.html", scenes: scenes)
+  def index(conn, %{"chapter_id" => id}) do
+    scenes = Transcripts.chapter_scenes(id)
+    render(conn, "index.html", scenes: scenes, chapter_id: id)
   end
 
   def new(conn, _params) do

@@ -4,7 +4,7 @@ defmodule JaTranslationsWeb.Admin.ChapterController do
   alias JaTranslations.Transcripts
   alias JaTranslations.Transcripts.Chapter
 
-  def index(conn, %{"game_transcripts_id" => id}) do
+  def index(conn, %{"game_transcript_id" => id}) do
     chapters = Transcripts.list_game_transcript_chapters(id)
     render(conn, "index.html", chapters: chapters, game_transcript_id: id)
   end

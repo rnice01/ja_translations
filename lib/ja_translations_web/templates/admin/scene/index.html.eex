@@ -20,13 +20,13 @@
       <td><%= scene.title %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.admin_scene_path(@conn, :show, scene) %></span>
-        <span><%= link "Edit", to: Routes.admin_scene_path(@conn, :edit, scene) %></span>
-        <span><%= link "Delete", to: Routes.admin_scene_path(@conn, :delete, scene), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.admin_chapter_scene_path(@conn, :show, @chapter_id, scene.id) %></span>
+        <span><%= link "Edit", to: Routes.admin_chapter_scene_path(@conn, :edit, @chapter_id, scene.id) %></span>
+        <span><%= link "Delete", to: Routes.admin_chapter_scene_path(@conn, :delete, @chapter_id, scene.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Scene", to: Routes.admin_scene_path(@conn, :new) %></span>
+<span><%= link "New Scene", to: Routes.admin_chapter_scene_path(@conn, :new, @chapter_id) %></span>
