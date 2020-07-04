@@ -23,7 +23,7 @@ defmodule JaTranslationsWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    scope "/api", JaTranslationsAPI, as: :api do
+    scope "/api", JaTranslations.Api, as: :api do
       get "/game-transcripts/:id", GameTranscriptController, :show
       get "/game-transcripts/title/:title", GameTranscriptController, :by_title
       get "/scenes/:id", GameTranscriptController, :scenes
