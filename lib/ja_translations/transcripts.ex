@@ -129,16 +129,6 @@ defmodule JaTranslations.Transcripts do
     GameTranscript.changeset(game_transcript, attrs)
   end
 
-  def get_scene(id) do
-    dialogue_order = from(d in JaTranslations.Transcripts.Dialogue, order_by: d.number, preload: [:character])
-
-    scene = JaTranslations.Transcripts.Scene
-    |> where([s], s.id == ^id)
-    |> preload([dialogues: ^dialogue_order])
-    |> Repo.one
-
-    scene
-  end
 
   alias JaTranslations.Transcripts.GameTranscript
 
@@ -350,8 +340,16 @@ defmodule JaTranslations.Transcripts do
       %Scene{}
 
   """
-  def get_scene!(id), do: raise "TODO"
+  def get_scene!(id) do
+    dialogue_order = from(d in JaTranslations.Transcripts.Dialogue, order_by: d.number, preload: [:game_character])
 
+    scene = JaTranslations.Transcripts.Scene
+    |> where([s], s.id == ^id)
+    |> preload([dialogues: ^dialogue_order])
+    |> Repo.one
+
+    scene
+  end
   @doc """
   Creates a scene.
 
@@ -365,7 +363,9 @@ defmodule JaTranslations.Transcripts do
 
   """
   def create_scene(attrs \\ %{}) do
-    raise "TODO"
+    %Scene{}
+    |> Scene.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
@@ -409,8 +409,8 @@ defmodule JaTranslations.Transcripts do
       %Todo{...}
 
   """
-  def change_scene(%Scene{} = scene, _attrs \\ %{}) do
-    raise "TODO"
+  def change_scene(%Scene{} = scene, attrs \\ %{}) do
+    Scene.changeset(scene, attrs)
   end
 
   alias JaTranslations.Transcripts.GameCharacter
@@ -543,7 +543,10 @@ defmodule JaTranslations.Transcripts do
 
   """
   def create_dialogue(attrs \\ %{}) do
-    raise "TODO"
+    IO.inspect attrs
+    %Dialogue{}
+    |> Dialogue.changeset(attrs)
+    |> Repo.insert()
   end
 
   @doc """
@@ -587,7 +590,7 @@ defmodule JaTranslations.Transcripts do
       %Todo{...}
 
   """
-  def change_dialogue(%Dialogue{} = dialogue, _attrs \\ %{}) do
-    raise "TODO"
+  def change_dialogue(%Dialogue{} = dialogue, attrs \\ %{}) do
+    Dialogue.changeset(dialogue, attrs)
   end
 end

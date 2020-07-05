@@ -3,15 +3,16 @@ defmodule JaTranslationsWeb.Admin.SceneController do
 
   alias JaTranslations.Transcripts
   alias JaTranslations.Transcripts.Scene
+  alias JaTranslations.Transcripts.Dialogue
 
   def index(conn, %{"chapter_id" => id}) do
     scenes = Transcripts.chapter_scenes(id)
     render(conn, "index.html", scenes: scenes, chapter_id: id)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"chapter_id" => id}) do
     changeset = Transcripts.change_scene(%Scene{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, chapter_id: id)
   end
 
   def create(conn, %{"scene" => scene_params}) do
@@ -26,9 +27,23 @@ defmodule JaTranslationsWeb.Admin.SceneController do
     end
   end
 
+  def create_dialogue(conn, %{"dialogue" => dialogue_params}) do
+    case Transcripts.create_dialogue(dialogue_params) do
+    {:ok, dialogue} ->
+      conn
+      |> put_flash(:info, "Dialogue created for scene.")
+      |> redirect(to: Routes.admin_scene_path(conn, :show, dialogue.scene_id))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        scene = Transcripts.get_scene!(dialogue_params.scene_id)
+        render(conn, "show.html", scene: scene, dialogue_changeset: changeset)
+      end
+  end
+
   def show(conn, %{"id" => id}) do
     scene = Transcripts.get_scene!(id)
-    render(conn, "show.html", scene: scene)
+    dialogue_changeset = Transcripts.change_dialogue(%Dialogue{})
+    render(conn, "show.html", scene: scene, dialogue_changeset: dialogue_changeset)
   end
 
   def edit(conn, %{"id" => id}) do

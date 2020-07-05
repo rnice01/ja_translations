@@ -46,7 +46,7 @@ defmodule JaTranslationsWeb.Router do
     get "/logout", SessionController, :logout
   end
 
-   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+  scope "/admin", JaTranslationsWeb.Admin, as: :admin do
     pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
 
     get "/", PageController, :index
@@ -58,8 +58,9 @@ defmodule JaTranslationsWeb.Router do
     end
 
     resources "/scenes", SceneController do
-      resources "/dialogues", DialogueController
+      post "/dialogue", SceneController, :create_dialogue
     end
+    resources "/dialogues", DialogueController
 
     resources "/game-characters", GameCharacterController
   end

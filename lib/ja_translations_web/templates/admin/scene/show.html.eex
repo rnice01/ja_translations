@@ -1,28 +1,88 @@
 <h1>Show Scene</h1>
 
-<ul>
+<div class="flex mb-4">
+  <div class="w-1/2 p-2 bg-gray-200">
+    <ul class="w-full">
+      <li>
+        <strong>Description:</strong>
+        <%= @scene.description %>
+      </li>
+      <li>
+        <strong>Image:</strong>
+        <%= @scene.image %>
+      </li>
+      <li>
+        <strong>Number:</strong>
+        <%= @scene.number %>
+      </li>
+      <li>
+        <strong>Title:</strong>
+        <%= @scene.title %>
+      </li>
+    </ul>
+    <div class="w-full">
+      <%= form_for :dialogue, Routes.admin_scene_scene_path(@conn, :create_dialogue, @scene.id), fn f -> %>
+        <%= if @dialogue_changeset.action do %>
+          <div class="alert alert-danger">
+          <p>Oops, something went wrong! Please check the errors below.</p>
+          </div>
+        <% end %>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @scene.description %>
-  </li>
+        <%= label f, :context %>
+        <%= text_input f, :context %>
+        <%= error_tag f, :context %>
 
-  <li>
-    <strong>Image:</strong>
-    <%= @scene.image %>
-  </li>
+        <%= label f, :english %>
+        <%= text_input f, :english %>
+        <%= error_tag f, :english %>
 
-  <li>
-    <strong>Number:</strong>
-    <%= @scene.number %>
-  </li>
+        <%= label f, :japanese %>
+        <%= text_input f, :japanese %>
+        <%= error_tag f, :japanese %>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @scene.title %>
-  </li>
+        <%= label f, :grammar_notes %>
+        <%= multiple_select f, :grammar_notes, ["Option 1": "option1", "Option 2": "option2"] %>
+        <%= error_tag f, :grammar_notes %>
 
-</ul>
+        <%= label f, :number %>
+        <%= number_input f, :number %>
+        <%= error_tag f, :number %>
+
+        <%= hidden_input f, :scene_id, value: @scene.id %>
+      <div>
+        <%= submit "Save" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="w-1/2 p-2 bg-gray-300">
+    <h2>Dialogues</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Character</th>
+          <th>Context</th>
+          <th>Japanese</th>
+          <th>English</th>
+          <th>Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for d <- @scene.dialogues do %>
+        <tr>
+          <td><%= d.game_character || "N/A" %></td>
+          <td><%= d.context %></td>
+          <td><%= d.japanese %></td>
+          <td><%= d.english %></td>
+          <td><%= d.number %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 
 <span><%= link "Edit", to: Routes.admin_scene_path(@conn, :edit, @scene) %></span>
 <span><%= link "Back", to: Routes.admin_scene_path(@conn, :index) %></span>

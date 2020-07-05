@@ -21,6 +21,8 @@
   <%= text_input f, :title %>
   <%= error_tag f, :title %>
 
+  <%= hidden_input f, :chapter_id, value: @chapter_id %>
+
   <div>
     <%= submit "Save" %>
   </div>

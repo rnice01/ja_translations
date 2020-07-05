@@ -68,6 +68,6 @@ JaTranslations.Repo.insert!(
       }
     ]
   }
-}
+)
 
 JaTranslations.Accounts.create_user(%{username: "user", email: "admin@email.com", password: "password", is_admin: true})

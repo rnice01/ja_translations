@@ -17,7 +17,7 @@ defmodule JaTranslations.Transcripts.Dialogue do
   @doc false
   def changeset(dialogue, attrs) do
     dialogue
-    |> cast(attrs, [:context, :japanese, :english, :grammar_notes, :number])
-    |> validate_required([:context, :japanese, :english, :grammar_notes, :number])
+    |> cast(attrs, [:context, :japanese, :english, :grammar_notes, :number, :scene_id, :game_character_id])
+    |> validate_required([:context, :japanese, :english, :grammar_notes, :number, :scene_id])
   end
 end
