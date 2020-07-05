@@ -1,8 +1,10 @@
-<h1>Show Scene</h1>
-
 <div class="flex mb-4">
-  <div class="w-1/2 p-2 bg-gray-200">
+  <div class="w-1/2 p-2 bg-gray-100">
     <ul class="w-full">
+      <li>
+        <strong>Title:</strong>
+        <%= @scene.title %>
+      </li>
       <li>
         <strong>Description:</strong>
         <%= @scene.description %>
@@ -15,66 +17,78 @@
         <strong>Number:</strong>
         <%= @scene.number %>
       </li>
-      <li>
-        <strong>Title:</strong>
-        <%= @scene.title %>
-      </li>
     </ul>
     <div class="w-full">
-      <%= form_for :dialogue, Routes.admin_scene_scene_path(@conn, :create_dialogue, @scene.id), fn f -> %>
+      <%= form_for :dialogue, Routes.admin_scene_scene_path(@conn, :create_dialogue, @scene.id), [class: "w-full flex flex-wrap"], fn f -> %>
         <%= if @dialogue_changeset.action do %>
           <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
           </div>
         <% end %>
 
-        <%= label f, :context %>
-        <%= text_input f, :context %>
-        <%= error_tag f, :context %>
+        <div class="w-1/2 px-1">
+          <%= label f, :game_character, [class: "w-full block"]  %>
+          <%= select f, :game_character, character_options(@game_characters), [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+          <%= error_tag f, :game_character %>
+        </div>
+        <div class="w-1/2 px-1">
+          <%= label f, :context, [class: "w-full block"]  %>
+          <%= text_input f, :context, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+          <%= error_tag f, :context %>
+        </div>
 
-        <%= label f, :english %>
-        <%= text_input f, :english %>
-        <%= error_tag f, :english %>
+        <div class="w-full">
+          <%= label f, :english, [class: "w-full block"]  %>
+          <%= textarea f, :english, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+          <%= error_tag f, :english %>
+        </div>
 
-        <%= label f, :japanese %>
-        <%= text_input f, :japanese %>
-        <%= error_tag f, :japanese %>
+        <div class="w-full">
+          <%= label f, :japanese, [class: "w-full block"]  %>
+          <%= textarea f, :japanese, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+          <%= error_tag f, :japanese %>
+        </div>
+        <div class="w-full">
+          <%= label f, :grammar_notes, [class: "w-full block"]  %>
+          <%= textarea f, :grammar_notes, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+          <%= error_tag f, :grammar_notes %>
+        </div>
 
-        <%= label f, :grammar_notes %>
-        <%= multiple_select f, :grammar_notes, ["Option 1": "option1", "Option 2": "option2"] %>
-        <%= error_tag f, :grammar_notes %>
-
-        <%= label f, :number %>
-        <%= number_input f, :number %>
-        <%= error_tag f, :number %>
+        <div class="w-1/4">
+          <%= label f, :number, [class: "w-full block"] %>
+          <%= number_input f, :number, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"] %>
+          <%= error_tag f, :number %>
+        </div>
 
         <%= hidden_input f, :scene_id, value: @scene.id %>
-      <div>
-        <%= submit "Save" %>
+      <div class="w-full">
+        <%= submit "Save", [class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"] %>
       </div>
       <% end %>
     </div>
   </div>
   <div class="w-1/2 p-2 bg-gray-300">
     <h2>Dialogues</h2>
-    <table>
+    <table class="table-auto">
       <thead>
         <tr>
-          <th>Character</th>
-          <th>Context</th>
-          <th>Japanese</th>
-          <th>English</th>
-          <th>Number</th>
+          <th class="px-4 py-2">Character</th>
+          <th class="px-4 py-2">Context</th>
+          <th class="px-4 py-2">Japanese</th>
+          <th class="px-4 py-2">English</th>
+          <th class="px-4 py-2">Number</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <%= for d <- @scene.dialogues do %>
         <tr>
-          <td><%= d.game_character || "N/A" %></td>
-          <td><%= d.context %></td>
-          <td><%= d.japanese %></td>
-          <td><%= d.english %></td>
-          <td><%= d.number %></td>
+          <td class="px-4 py-2"><%= d.game_character || "N/A" %></td>
+          <td class="px-4 py-2"><%= d.context %></td>
+          <td class="px-4 py-2"><%= d.japanese %></td>
+          <td class="px-4 py-2"><%= d.english %></td>
+          <td class="px-4 py-2"><%= d.number %></td>
+          <td class="px-4 py-2"><%= link "Edit", to: Routes.admin_dialogue_path(@conn, :edit, d.id) %></td>
         </tr>
         <% end %>
       </tbody>

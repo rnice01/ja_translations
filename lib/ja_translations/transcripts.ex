@@ -425,7 +425,8 @@ defmodule JaTranslations.Transcripts do
 
   """
   def list_game_characters do
-    raise "TODO"
+    GameCharacter
+    |> Repo.all
   end
 
   @doc """

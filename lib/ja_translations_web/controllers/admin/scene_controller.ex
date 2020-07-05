@@ -43,13 +43,14 @@ defmodule JaTranslationsWeb.Admin.SceneController do
   def show(conn, %{"id" => id}) do
     scene = Transcripts.get_scene!(id)
     dialogue_changeset = Transcripts.change_dialogue(%Dialogue{})
-    render(conn, "show.html", scene: scene, dialogue_changeset: dialogue_changeset)
+    characters = Transcripts.list_game_characters()
+    render(conn, "show.html", scene: scene, dialogue_changeset: dialogue_changeset, game_characters: characters)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id, "chapter_id" => chapter_id}) do
     scene = Transcripts.get_scene!(id)
     changeset = Transcripts.change_scene(scene)
-    render(conn, "edit.html", scene: scene, changeset: changeset)
+    render(conn, "edit.html", scene: scene, changeset: changeset, chapter_id: chapter_id)
   end
 
   def update(conn, %{"id" => id, "scene" => scene_params}) do

@@ -5,7 +5,7 @@ defmodule JaTranslations.Transcripts.Dialogue do
   schema "dialogues" do
     field :context, :string
     field :english, :string
-    field :grammar_notes, {:array, :string}
+    field :grammar_notes, :string
     field :japanese, :string
     field :number, :integer
     belongs_to :game_character, JaTranslations.Transcripts.GameCharacter
