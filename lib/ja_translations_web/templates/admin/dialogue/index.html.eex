@@ -22,13 +22,13 @@
       <td><%= dialogue.number %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.admin_dialogue_path(@conn, :show, dialogue) %></span>
-        <span><%= link "Edit", to: Routes.admin_dialogue_path(@conn, :edit, dialogue) %></span>
-        <span><%= link "Delete", to: Routes.admin_dialogue_path(@conn, :delete, dialogue), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.admin_scene_dialogue_path(@conn, :show, @scene_id, dialogue) %></span>
+        <span><%= link "Edit", to: Routes.admin_scene_dialogue_path(@conn, :edit, @scene_id, dialogue) %></span>
+        <span><%= link "Delete", to: Routes.admin_scene_dialogue_path(@conn, :delete, @scene_id, dialogue), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Dialogue", to: Routes.admin_dialogue_path(@conn, :new) %></span>
+<span><%= link "New Dialogue", to: Routes.admin_scene_dialogue_path(@conn, :new, @scene_id) %></span>

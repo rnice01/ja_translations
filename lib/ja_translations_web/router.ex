@@ -58,9 +58,8 @@ defmodule JaTranslationsWeb.Router do
     end
 
     resources "/scenes", SceneController do
-      post "/dialogue", SceneController, :create_dialogue
+      resources "/dialogues", DialogueController
     end
-    resources "/dialogues", DialogueController
 
     resources "/game-characters", GameCharacterController
   end

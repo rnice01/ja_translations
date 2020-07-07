@@ -1,5 +1,5 @@
 <h1>New Dialogue</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.admin_dialogue_path(@conn, :create)) %>
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_scene_dialogue_path(@conn, :create, @scene_id)) %>
 
-<span><%= link "Back", to: Routes.admin_dialogue_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.admin_scene_dialogue_path(@conn, :index, @scene_id) %></span>

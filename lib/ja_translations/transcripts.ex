@@ -506,16 +506,13 @@ defmodule JaTranslations.Transcripts do
   alias JaTranslations.Transcripts.Dialogue
 
   @doc """
-  Returns the list of dialogues.
-
-  ## Examples
-
-      iex> list_dialogues()
-      [%Dialogue{}, ...]
-
+  Returns the list of dialogues for a scene.
   """
-  def list_dialogues do
-    raise "TODO"
+  def scene_dialogues(scene_id) do
+    Dialogue
+    |> where([d], d.scene_id == ^scene_id)
+    |> order_by([d], d.number)
+    |> Repo.all
   end
 
   @doc """
