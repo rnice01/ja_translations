@@ -9,9 +9,21 @@ defmodule JaTranslationsWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :admin_layout do
+    plug :put_layout, {JaTranslationsWeb.LayoutView, :admin}
+  end
+
+  pipeline :auth do
+    plug JaTranslations.Accounts.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
-    scope "api", JaTranslationsAPI, as: :api do
+    scope "/api", JaTranslations.Api, as: :api do
       get "/game-transcripts/:id", GameTranscriptController, :show
       get "/game-transcripts/title/:title", GameTranscriptController, :by_title
       get "/scenes/:id", GameTranscriptController, :scenes
@@ -19,11 +31,37 @@ defmodule JaTranslationsWeb.Router do
   end
 
   scope "/", JaTranslationsWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     get "/game-transcripts", GameTranscriptController, :index
     get "/game-transcripts/:id", GameTranscriptController, :show
+  end
+
+  scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin_layout, :auth]
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
+  end
+
+  scope "/admin", JaTranslationsWeb.Admin, as: :admin do
+    pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
+
+    get "/", PageController, :index
+    resources "/game-transcripts", GameTranscriptController do
+      resources "/chapters", ChapterController
+      resources "/characters", GameCharactersController
+    end
+
+    resources "/chapters", ChapterController do
+      resources "/scenes", SceneController
+    end
+
+    resources "/scenes", SceneController do
+      resources "/dialogues", DialogueController
+    end
   end
 
   # Other scopes may use custom stacks.

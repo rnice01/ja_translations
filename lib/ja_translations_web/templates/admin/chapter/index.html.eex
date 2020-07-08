@@ -1,0 +1,29 @@
+<h1>Listing Chapters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Scenes</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for chapter <- @chapters do %>
+    <tr>
+      <td><%= chapter.name %></td>
+      <td><%= chapter.number %></td>
+      <td><%= link "Scenes", to: Routes.admin_chapter_scene_path(@conn, :index, chapter.id) %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.admin_game_transcript_chapter_path(@conn, :show, @game_transcript_id, chapter.id) %></span>
+        <span><%= link "Edit", to: Routes.admin_game_transcript_chapter_path(@conn, :edit, @game_transcript_id, chapter.id) %></span>
+        <span><%= link "Delete", to: Routes.admin_game_transcript_chapter_path(@conn, :delete, @game_transcript_id, chapter.id), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Chapter", to: Routes.admin_game_transcript_chapter_path(@conn, :new, @game_transcript_id) %></span>

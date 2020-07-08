@@ -1,0 +1,69 @@
+<div class="flex mb-4">
+  <div class="w-1/2 p-2 bg-gray-100">
+    <ul class="w-full">
+      <li>
+        <strong>Title:</strong>
+        <%= @scene.title %>
+      </li>
+      <li>
+        <strong>Description:</strong>
+        <%= @scene.description %>
+      </li>
+      <li>
+        <strong>Image:</strong>
+        <%= @scene.image %>
+      </li>
+      <li>
+        <strong>Number:</strong>
+        <%= @scene.number %>
+      </li>
+    </ul>
+    <div class="w-full">
+      <%=
+        render(
+          JaTranslationsWeb.Admin.DialogueView,
+          "form.html",
+           Map.merge(assigns, %{
+             action: Routes.admin_scene_dialogue_path(@conn, :create, @scene.id),
+             changeset: @dialogue_changeset,
+             scene_id: @scene.id,
+             redirect: @conn.request_path
+            }
+          )
+        )
+      %>
+    </div>
+  </div>
+  <div class="w-1/2 p-2 bg-gray-300">
+    <h2>Dialogues</h2>
+    <table class="table-auto">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">Character</th>
+          <th class="px-4 py-2">Context</th>
+          <th class="px-4 py-2">Japanese</th>
+          <th class="px-4 py-2">English</th>
+          <th class="px-4 py-2">Number</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for d <- @scene.dialogues do %>
+        <tr>
+          <td class="px-4 py-2"><%= d.character || "N/A" %></td>
+          <td class="px-4 py-2"><%= d.context %></td>
+          <td class="px-4 py-2"><%= d.japanese %></td>
+          <td class="px-4 py-2"><%= d.english %></td>
+          <td class="px-4 py-2"><%= d.number %></td>
+          <td class="px-4 py-2"><%= link "Edit", to: Routes.admin_scene_dialogue_path(@conn, :edit, @scene.id, d.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<span><%= link "Edit", to: Routes.admin_scene_path(@conn, :edit, @scene) %></span>
+<span><%= link "Back", to: Routes.admin_scene_path(@conn, :index) %></span>

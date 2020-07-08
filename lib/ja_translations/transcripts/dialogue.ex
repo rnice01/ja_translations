@@ -4,11 +4,11 @@ defmodule JaTranslations.Transcripts.Dialogue do
 
   schema "dialogues" do
     field :context, :string
+    field :character, :string
     field :english, :string
-    field :grammar_notes, {:array, :string}
+    field :grammar_notes, :string
     field :japanese, :string
     field :number, :integer
-    belongs_to :character, JaTranslations.Transcripts.GameCharacter
     belongs_to :scene, JaTranslations.Transcripts.Scene
 
     timestamps()
@@ -17,7 +17,7 @@ defmodule JaTranslations.Transcripts.Dialogue do
   @doc false
   def changeset(dialogue, attrs) do
     dialogue
-    |> cast(attrs, [:context, :japanese, :english, :grammar_notes, :number])
-    |> validate_required([:context, :japanese, :english, :grammar_notes, :number])
+    |> cast(attrs, [:context, :japanese, :english, :grammar_notes, :number, :scene_id, :character])
+    |> validate_required([:japanese, :number, :scene_id])
   end
 end

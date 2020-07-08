@@ -1,0 +1,18 @@
+<h1>Show Chapter</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @chapter.name %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @chapter.number %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.admin_chapter_path(@conn, :edit, @chapter) %></span>
+<span><%= link "Back", to: Routes.admin_chapter_path(@conn, :index) %></span>

@@ -1,0 +1,51 @@
+<%= form_for :dialogue, @action, [class: "w-full flex flex-wrap"], fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="w-1/2 px-1">
+    <%= label f, :character, [class: "w-full block"]  %>
+    <%= text_input f, :character, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :character %>
+  </div>
+
+  <div class="w-1/2 px-1">
+    <%= label f, :context, [class: "w-full block"]  %>
+    <%= text_input f, :context, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :context %>
+  </div>
+
+  <div class="w-full">
+    <%= label f, :english, [class: "w-full block"]  %>
+    <%= textarea f, :english, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :english %>
+  </div>
+
+  <div class="w-full">
+    <%= label f, :japanese, [class: "w-full block"]  %>
+    <%= textarea f, :japanese, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :japanese %>
+  </div>
+  <div class="w-full">
+    <%= label f, :grammar_notes, [class: "w-full block"]  %>
+    <%= textarea f, :grammar_notes, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :grammar_notes %>
+  </div>
+
+  <div class="w-1/4">
+    <%= label f, :number, [class: "w-full block"] %>
+    <%= number_input f, :number, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"] %>
+    <%= error_tag f, :number %>
+  </div>
+
+  <%= hidden_input f, :scene_id, value: @scene_id %>
+
+  <%= if Map.has_key?(assigns, :redirect) do %>
+    <input type="hidden" name="redirect" value="<%= @redirect %>" />
+  <% end %>
+  <div class="w-full">
+    <%= submit "Save", [class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"] %>
+  </div>
+<% end %>

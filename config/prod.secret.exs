@@ -30,6 +30,14 @@ config :ja_translations, JaTranslationsWeb.Endpoint,
   ],
   secret_key_base: secret_key_base
 
+config :ja_translations, JaTranslations.Accounts.Guardian,
+  issuer: "ja_translation",
+  secret_key: System.get_env("GUARDIAN_SECRET_KEY") ||
+    raise """
+    environment variable GUARDIAN_SECRET_KEY is missing.
+    Generate it with mix.guardian.gen.secret
+    """
+
 # ## Using releases (Elixir v1.9+)
 #
 # If you are doing OTP releases, you need to instruct Phoenix
