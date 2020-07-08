@@ -6,10 +6,11 @@
   <% end %>
 
   <div class="w-1/2 px-1">
-    <%= label f, :game_character, [class: "w-full block"]  %>
-    <%= select f, :game_character, character_options(@game_characters), [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
-    <%= error_tag f, :game_character %>
+    <%= label f, :character, [class: "w-full block"]  %>
+    <%= text_input f, :character, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
+    <%= error_tag f, :character %>
   </div>
+
   <div class="w-1/2 px-1">
     <%= label f, :context, [class: "w-full block"]  %>
     <%= text_input f, :context, [class: "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"]  %>
@@ -39,7 +40,7 @@
     <%= error_tag f, :number %>
   </div>
 
-  <%= hidden_input f, :scene_id, value: @scene.id %>
+  <%= hidden_input f, :scene_id, value: @scene_id %>
 
   <%= if Map.has_key?(assigns, :redirect) do %>
     <input type="hidden" name="redirect" value="<%= @redirect %>" />

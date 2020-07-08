@@ -52,7 +52,9 @@ defmodule JaTranslationsWeb.Router do
     get "/", PageController, :index
     resources "/game-transcripts", GameTranscriptController do
       resources "/chapters", ChapterController
+      resources "/characters", GameCharactersController
     end
+
     resources "/chapters", ChapterController do
       resources "/scenes", SceneController
     end
@@ -60,8 +62,6 @@ defmodule JaTranslationsWeb.Router do
     resources "/scenes", SceneController do
       resources "/dialogues", DialogueController
     end
-
-    resources "/game-characters", GameCharacterController
   end
 
   # Other scopes may use custom stacks.

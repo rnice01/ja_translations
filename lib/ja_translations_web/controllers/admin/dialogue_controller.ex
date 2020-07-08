@@ -14,7 +14,7 @@ defmodule JaTranslationsWeb.Admin.DialogueController do
     render(conn, "new.html", changeset: changeset)
   end
 
-   def create(conn, %{"dialogue" => dialogue_params, "redirect" => redirect}) do
+   def create(conn, %{"dialogue" => dialogue_params, "redirect" => redirect, "scene_id" => scene_id}) do
     case Transcripts.create_dialogue(dialogue_params) do
       {:ok, _dialogue} ->
         conn
@@ -22,8 +22,7 @@ defmodule JaTranslationsWeb.Admin.DialogueController do
         |> redirect(to: redirect)
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        conn.redirect(to: redirect, changeset: changeset)
-        #render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, scene_id: scene_id)
     end
   end
 

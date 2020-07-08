@@ -3,6 +3,10 @@
 <ul>
 
   <li>
+    <strong>Character:</strong>
+    <%= @dialogue.character %>
+  </li>
+  <li>
     <strong>Context:</strong>
     <%= @dialogue.context %>
   </li>

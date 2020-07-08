@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Character</th>
       <th>Context</th>
       <th>English</th>
       <th>Japanese</th>
@@ -15,6 +16,7 @@
   <tbody>
 <%= for dialogue <- @dialogues do %>
     <tr>
+      <td><%= dialogue.character %></td>
       <td><%= dialogue.context %></td>
       <td><%= dialogue.english %></td>
       <td><%= dialogue.japanese %></td>

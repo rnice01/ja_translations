@@ -36,23 +36,19 @@ defmodule JaTranslations.Api.GameTranscriptView do
       description: s.description,
       image: s.image,
       dialogues: Enum.map(s.dialogues, fn %{
+        character: ch,
         context: c,
         japanese: j,
         english: e,
         grammar_notes: gn,
-        character: ch
       } ->
-        s = %{
+        %{
           context: c,
+          character: ch,
           japanese: j,
           english: e,
           grammar_notes: gn,
-          character: %{}
         }
-        if ch do
-          Map.put(s, :character, %{id: ch.id, name: ch.name, image: ch.image})
-        end
-        s
       end)
     }
   end

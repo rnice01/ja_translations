@@ -26,7 +26,6 @@
            Map.merge(assigns, %{
              action: Routes.admin_scene_dialogue_path(@conn, :create, @scene.id),
              changeset: @dialogue_changeset,
-             game_characters: @game_characters,
              scene_id: @scene.id,
              redirect: @conn.request_path
             }
@@ -51,7 +50,7 @@
       <tbody>
         <%= for d <- @scene.dialogues do %>
         <tr>
-          <td class="px-4 py-2"><%= d.game_character || "N/A" %></td>
+          <td class="px-4 py-2"><%= d.character || "N/A" %></td>
           <td class="px-4 py-2"><%= d.context %></td>
           <td class="px-4 py-2"><%= d.japanese %></td>
           <td class="px-4 py-2"><%= d.english %></td>
