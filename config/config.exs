@@ -13,7 +13,7 @@ config :ja_translations,
 # Configures the endpoint
 config :ja_translations, JaTranslationsWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "dPK32GHx9M2HR/FAM0XlbBLk/HgaDWKEH/Qm30mP87aHLYFsZiojQMObZumrTwUB",
+  secret_key_base: System.get_env("SECRET_KEY_BASE", "dPK32GHx9M2HR/FAM0XlbBLk/HgaDWKEH/Qm30mP87aHLYFsZiojQMObZumrTwUB"),
   render_errors: [view: JaTranslationsWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: JaTranslations.PubSub,
   live_view: [signing_salt: "nIoUW5qu"]
@@ -26,9 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :ja_translations, JaTranslations.Accounts.Guardian,
-  issuer: "ja_translation",
-  secret_key: ""
+config :ja_translations, :pow,
+  user: JaTranslations.Accounts.User,
+  repo: JaTranslations.Repo,
+  web_module: JaTranslationsWeb
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

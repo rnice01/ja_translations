@@ -70,4 +70,5 @@ JaTranslations.Repo.insert!(
   }
 )
 
-JaTranslations.Accounts.create_user(%{username: "user", email: "admin@email.com", password: "password", is_admin: true})
+JaTranslations.Accounts.create_admin(%{username: "admin", email: "admin@email.com", password: "supersecret", password_confirmation: "supersecret"})
+JaTranslations.Accounts.create_user(%{username: "user", email: "user@email.com", password: "supersecret", password_confirmation: "supersecret"})

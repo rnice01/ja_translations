@@ -37,6 +37,8 @@ defmodule JaTranslations.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  @type t :: %User{}
+
   @doc """
   Creates a user.
 
@@ -49,11 +51,22 @@ defmodule JaTranslations.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_user(map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
-    |> Repo.insert()
+    |> User.changeset_role(%{role: "user"})
+    |> Repo.insert!
   end
+
+  @spec create_admin(map()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
+  def create_admin(params) do
+    %User{}
+    |> User.changeset(params)
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.insert!
+  end
+
 
   @doc """
   Updates a user.
@@ -102,35 +115,10 @@ defmodule JaTranslations.Accounts do
     User.changeset(user, attrs)
   end
 
-  alias Argon2
-
-  def authenticate_user(email, plain_text_password) do
-    query = from u in User, where: u.email == ^email
-    case Repo.one(query) do
-      nil ->
-        Argon2.no_user_verify()
-        {:error, :invalid_credentials}
-      user ->
-        if Argon2.verify_pass(plain_text_password, user.password) do
-          {:ok, user}
-        else
-          {:error, :invalid_credentials}
-        end
-      end
-  end
-
-  def authenticate_admin(email, plain_text_password) do
-    query = from u in User, where: u.email == ^email and u.is_admin == true
-    case Repo.one(query) do
-      nil ->
-        Argon2.no_user_verify()
-        {:error, :invalid_credentials}
-      user ->
-        if Argon2.verify_pass(plain_text_password, user.password) do
-          {:ok, user}
-        else
-          {:error, :invalid_credentials}
-        end
-      end
+  @spec set_admin_role(t()) :: {:ok, t()} | {:error, Ecto.Changeset.t()}
+  def set_admin_role(user) do
+    user
+    |> User.changeset_role(%{role: "admin"})
+    |> Repo.update()
   end
 end

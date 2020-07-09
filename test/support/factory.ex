@@ -5,7 +5,7 @@ defmodule JaTranslations.Factory do
     %JaTranslations.Accounts.User{
       username: "some admin",
       email: "some_admin@domain.com",
-      is_admin: true
+      role: "admin"
     }
   end
 
@@ -13,7 +13,7 @@ defmodule JaTranslations.Factory do
     %JaTranslations.Accounts.User{
       username: "some username",
       email: "email@domain.com",
-      is_admin: false
+      role: "user"
     }
   end
 

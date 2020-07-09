@@ -1,41 +1,26 @@
 defmodule JaTranslations.Accounts.User do
   use Ecto.Schema
-  import Ecto.Changeset
-
-  alias Argon2
+  use Pow.Ecto.Schema
 
   schema "users" do
-    field :email, :string
-    field :is_admin, :boolean, default: false
-    field :password, :string
+    field :role, :string, default: "user"
     field :username, :string
+    pow_user_fields()
 
     timestamps()
   end
 
-  @spec changeset(
-          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
-        ) :: Ecto.Changeset.t()
-  @doc false
-  def changeset(user, attrs) do
-    user
-    |> cast(attrs, [:email, :username, :password, :is_admin])
-    |> validate_required([:email, :username, :password, :is_admin])
-    |> unique_constraint(:email)
-    |> normalize_email()
-    |> password_hash()
+  def changeset(user_or_changeset, attrs) do
+    user_or_changeset
+    |> pow_changeset(attrs)
+    |> Ecto.Changeset.cast(attrs, [:username])
+    |> Ecto.Changeset.validate_required([:username])
   end
 
-  defp normalize_email(%Ecto.Changeset{valid?: true, changes: %{email: email}} = changeset) do
-    change(changeset, email: String.downcase(email))
+  @spec changeset_role(Ecto.Schema.t() | Ecto.Changeset.t(), map()) :: Ecto.Changeset.t()
+  def changeset_role(user_or_changeset, attrs) do
+    user_or_changeset
+    |> Ecto.Changeset.cast(attrs, [:role])
+    |> Ecto.Changeset.validate_inclusion(:role, ~w(user admin))
   end
-
-  defp normalize_email(changeset), do: changeset
-
-  defp password_hash(%Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset) do
-    change(changeset, password: Argon2.hash_pwd_salt(password))
-  end
-
-  defp password_hash(changeset), do: changeset
 end

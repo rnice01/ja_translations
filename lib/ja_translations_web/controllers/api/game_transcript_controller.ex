@@ -31,7 +31,7 @@ defmodule JaTranslations.Api.GameTranscriptController do
   end
 
   def scenes(conn, %{"id" => id}) do
-    scene = Transcripts.get_scene(id)
+    scene = Transcripts.get_scene!(id)
     render(conn, "scene.json", scene: scene)
   end
 end
