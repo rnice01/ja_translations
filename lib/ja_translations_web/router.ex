@@ -1,5 +1,6 @@
 defmodule JaTranslationsWeb.Router do
   use JaTranslationsWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,12 +14,13 @@ defmodule JaTranslationsWeb.Router do
     plug :put_layout, {JaTranslationsWeb.LayoutView, :admin}
   end
 
-  pipeline :auth do
-    plug JaTranslations.Accounts.Pipeline
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
   end
 
-  pipeline :ensure_auth do
-    plug Guardian.Plug.EnsureAuthenticated
+  pipeline :admin do
+    plug JaTranslationsWeb.EnsureRolePlug, :admin
   end
 
   pipeline :api do
@@ -30,8 +32,13 @@ defmodule JaTranslationsWeb.Router do
     end
   end
 
+  scope "/" do
+    pipe_through [:browser]
+    pow_routes()
+  end
+
   scope "/", JaTranslationsWeb do
-    pipe_through [:browser, :auth]
+    pipe_through [:browser]
 
     get "/", PageController, :index
     get "/game-transcripts", GameTranscriptController, :index
@@ -39,15 +46,7 @@ defmodule JaTranslationsWeb.Router do
   end
 
   scope "/admin", JaTranslationsWeb.Admin, as: :admin do
-    pipe_through [:browser, :admin_layout, :auth]
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :login
-    get "/logout", SessionController, :logout
-  end
-
-  scope "/admin", JaTranslationsWeb.Admin, as: :admin do
-    pipe_through [:browser, :admin_layout, :auth, :ensure_auth]
+    pipe_through [:browser, :admin_layout, :protected, :admin]
 
     get "/", PageController, :index
     resources "/game-transcripts", GameTranscriptController do
