@@ -41,6 +41,7 @@ defmodule JaTranslationsWeb.Router do
     pipe_through [:browser]
 
     get "/", PageController, :index
+    get "/flashcards", PageController, :flash_cards
     get "/game-transcripts", GameTranscriptController, :index
     get "/game-transcripts/:id", GameTranscriptController, :show
   end
