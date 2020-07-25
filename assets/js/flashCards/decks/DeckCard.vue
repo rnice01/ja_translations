@@ -5,12 +5,7 @@
         style="background-image: url('https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80')">
       </div>
       <div class="w-2/3 p-4">
-        <h1 class="text-gray-900 font-bold text-2xl">{{title}}</h1>
-        <p class="mt-2 text-gray-600 text-sm">{{description}}</p>
-        <div class="flex flex-wrap item-center mt-2">
-          <p class="w-100">Cards in this deck: {{numberOfCards}}</p>
-        </div>
-        <div class="flex justify-end mt-3">
+        <div class="flex justify-end">
           <div class="m-2">
             <svg class="stroke-current text-blue-600 h-6 w-6" viewBox="0 0 24 24" fill="none" stroke-width="2">
               <path
@@ -26,6 +21,14 @@
               </path>
             </svg>
           </div>
+        </div>
+        <h1 class="text-gray-900 font-bold text-3xl">{{title}}</h1>
+        <p class="mt-2 text-gray-600 text-sm">{{description}}</p>
+        <div class="flex flex-wrap item-center mt-2">
+          <p class="w-100">Cards in this deck: {{numberOfCards}}</p>
+        </div>
+        <div class="flex justify-end mt-1">
+          <router-link :to="'/quiz/' + id" tag="button" class="bg-blue-300 p-3 rounded border border-blue-400 hover:bg-blue-400">Begin Reviews</router-link>
         </div>
       </div>
     </div>

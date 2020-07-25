@@ -10,6 +10,9 @@
       :description="dc.description"
       :numberOfCards="dc.numberOfCards"
       ></DeckCard>
+      <div class="py-6 md:w-1/2 sm:w-full lg:w-1/3 px-2 text-center">
+        <svg class="stroke-current text-blue-600 h-12 w-12" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 4v16m8-8H4"></path></svg>
+      </div>
     </div>
   </div>
 </template>
